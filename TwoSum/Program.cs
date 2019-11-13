@@ -27,13 +27,14 @@ namespace TwoSum
             for(int i = 0; i < nums.Length ; i++){
                 //another loop to go through all values EXCEPT the one you are currently on
                 for(int y = 0; y < nums.Length; y++){
-                    //make sure value isnt the same
-                    if(nums[i] != nums[y]){
+                    //make sure value isnt the same (only the index needs to differ)
+                    if(i != y){
                         //check if condition is met
                         if(nums[i] + nums[y] == target){
                             //add as newArr members and break loop
                             newArr[0] = y;
                             newArr[1] = i;
+                            
                             break;
                         }
                     }
@@ -47,8 +48,8 @@ namespace TwoSum
         static void Main(string[] args)
         {
             //Vars
-            int target = 9;
-            int[] nums = new int[] {2,7,11,15};
+            int target = 6;
+            int[] nums = new int[] {3,3};
             int[] answerArr = Program.TwoSum(nums,target);
 
             //Out
