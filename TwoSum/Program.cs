@@ -32,13 +32,14 @@ namespace TwoSum
                         //check if condition is met
                         if(nums[i] + nums[y] == target){
                             //add as newArr members and break loop
-                            newArr[0] = nums[i];
-                            newArr[1] = nums[y];
+                            newArr[0] = y;
+                            newArr[1] = i;
                             break;
                         }
                     }
                 }
             }
+            //return indexes
             return newArr;
     }
  
@@ -51,7 +52,7 @@ namespace TwoSum
             int[] answerArr = Program.TwoSum(nums,target);
 
             //Out
-            Console.WriteLine($"{answerArr[0]} + {answerArr[1]} = {target}");
+            Console.WriteLine($"{answerArr[0]} {answerArr[1]}");
         }
     }
 }
