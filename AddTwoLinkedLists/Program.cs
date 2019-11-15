@@ -46,29 +46,65 @@ namespace AddTwoLinkedLists
             //carry other number
             int carryOver = 0;
 
-            while(temp1 != null || carryOver == 1){
+            while(temp1 != null || temp2 != null || carryOver == 1){
                 //create new node for each calculation + calculate and make it its value
                 ListNode newNode = new ListNode(0);
                 newNode.next = null;
 
                 //calculation logic
-                if(temp1 == null && carryOver == 1){
+                if(temp1 == null && temp2 == null && carryOver == 1){
                     newNode.val = 1;
                     carryOver = 0;
                 }
                 else {
-                    if(temp1.val + temp2.val > 9){
-                        newNode.val = (temp1.val + temp2.val + carryOver) - 10;
-                        carryOver = 1;
+                    if(temp1 != null && temp2!= null){
+                        if(temp1.val + temp2.val > 9){
+                            newNode.val = (temp1.val + temp2.val + carryOver) - 10;
+                            carryOver = 1;
+                        }
+                        else {
+                            if(temp1.val + temp2.val + carryOver > 9){
+                                newNode.val = temp1.val + temp2.val + carryOver - 10;
+                                carryOver = 1;
+                            }
+                            else {
+                                newNode.val = temp1.val + temp2.val + carryOver;
+                                carryOver = 0;
+                            }
+
+                        }
+
+                        //traverse further
+                        temp1 = temp1.next;
+                        temp2 = temp2.next;
                     }
-                    else {
-                        newNode.val = temp1.val + temp2.val + carryOver;
-                        carryOver = 0;
+                    //one is null ( had less arguments )
+                    else{
+                        if(temp1 == null){
+                            //incase carry over 9+1 is 10
+                            if(temp2.val + carryOver > 9){
+                                newNode.val = temp2.val +carryOver - 10;
+                                carryOver = 1;
+                            }
+                            else {
+                                newNode.val = temp2.val + carryOver;
+                                carryOver = 0;
+                            }
+                            temp2 = temp2.next;
+                        }
+                        else {
+                            if(temp1.val + carryOver > 9){
+                                newNode.val = temp1.val + carryOver - 10;
+                                carryOver = 1;                                    
+                            }
+                            else{
+                                newNode.val = temp1.val + carryOver;
+                                carryOver = 0;
+                            }
+                            temp1 = temp1.next;
+                        }
                     }
 
-                    //traverse further
-                    temp1 = temp1.next;
-                    temp2 = temp2.next;
                 }
 
                 
@@ -99,24 +135,24 @@ namespace AddTwoLinkedLists
             //list node 1
             // ListNode node3 = new ListNode(3);
             // node3.next = null;
-            // ListNode node2 = new ListNode(4);
-            // node2.next = node3;
-            ListNode node1 = new ListNode(5);
-            node1.next = null;
+            ListNode node2 = new ListNode(7);
+            node2.next = null;
+            ListNode node1 = new ListNode(3);
+            node1.next = node2;
             // 342 in reverse (243)
             
             //list node 2
             // ListNode node3_2 = new ListNode(4);
             // node3_2.next = null;
-            // ListNode node2_2 = new ListNode(6);
-            // node2_2.next = node3_2;
-            ListNode node1_2 = new ListNode(5);
-            node1_2.next = null;
+            ListNode node2_2 = new ListNode(2);
+            node2_2.next = null;
+            ListNode node1_2 = new ListNode(9);
+            node1_2.next = node2_2;
             // 465 in reverse (564)
             
             
             //out
-            ListNode output = AddTwoNumbers(node1,node1_2);
+            ListNode output = AddTwoNumbers(node1_2,node1);
             //traversal node
             ListNode temp = output;
             while(temp!=null){
