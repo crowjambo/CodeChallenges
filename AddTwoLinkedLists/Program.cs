@@ -35,6 +35,12 @@ namespace AddTwoLinkedLists
             }
          }
 
+
+        /*
+            TODO NOTES:
+                - alot of redundancy and repetition, can shorten things and reuse things more
+                - no need for queue, can replace with anything else or even avoid using collection altogether
+        */
         public static ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
             //collection
             Queue<ListNode> output = new Queue<ListNode>();
