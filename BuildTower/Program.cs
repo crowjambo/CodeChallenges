@@ -27,50 +27,34 @@ namespace BuildTower
     {
           public static string[] TowerBuilder(int nFloors)
          {
+             //vars
             List<string> list_string = new List<string>();
             int starCounter = 1;
+
+            //main loop / columns
             for(int i = 0 ; i < nFloors ; i++){
+                //reset
                 string output = "";
+
+                //special case for 1 floor
+                if(nFloors == 1){
+                    output += "*";
+                    return new String[] {output};
+                }
+
+                //horizontal adding / rows
                 for(int j = 0; j < nFloors*2-1 ; j++){
-                    //odd number floors
-                    if(nFloors %2 != 0){
-                        //special case for 1 floor
-                        if(nFloors == 1){
+                    if(j == nFloors-i-1){
+                        for(int x=0; x<starCounter; x++){
                             output += "*";
-                        }
-                        //normal
-                        else if(j == nFloors-i-1){
-                            for(int x=0; x<starCounter; x++){
-                                output += "*";
-
-                                if(x!=0){
-                                    j++;    
-                                }
-                                
+                            if(x!=0){
+                                j++;    
                             }
                         }
-                        else{
-                            output += " ";
-                        }
                     }
-                    //even numbered floors
                     else{
-                        // if(j == nFloors/2-i ){
-                        if(j == nFloors-1-i ){
-                            for(int x=0; x<starCounter; x++){
-                                output += "*";
-                                if(x!=0){
-                                    j++;
-                                }
-                                
-
-                            }
-                        }
-                        else{
-                            output += " ";
-                        }
+                        output += " ";
                     }
-                    
                 }
                 starCounter += 2;
                 list_string.Add(output);
@@ -85,7 +69,7 @@ namespace BuildTower
 
         static void Main(string[] args)
         {
-            foreach(var x in TowerBuilder(4)){
+            foreach(var x in TowerBuilder(12)){
                 Console.WriteLine("[" + x + "]");
             }    
         }
