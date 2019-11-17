@@ -80,8 +80,8 @@ namespace TitleCase
 
         static void Main(string[] args)
         {
-            string titleInput = "a clash of KINGS";
-            string wordsInput = "a an the of";
+            //string titleInput = "a clash of KINGS";
+            //string wordsInput = "a an the of";
             //Console.WriteLine(TitleCase(titleInput, wordsInput));
             //Console.WriteLine(TitleCase("the quick brown fox"));
             Console.WriteLine(TitleCase("THE WIND IN THE WILLOWS", "The In"));
