@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AnagramsFind
 {
@@ -18,7 +19,35 @@ namespace AnagramsFind
         */
 
         public static List<string> Anagrams(string word, List<string> words){
-            
+            //vars
+            List<string> outputList = new List<string>();
+            char[] inputWord = word.ToCharArray();
+            char[] tempWord;
+            List<string> wordList = new List<string>();
+            foreach(var x in words){
+                wordList.Add(x);
+            }
+
+            //prepping input word
+            for(int i = 0; i < inputWord.Length ; i++){
+                inputWord[i] = Char.ToLower(inputWord[i]);
+            }
+            Array.Sort(inputWord);
+    
+            //main loop
+            foreach(string x in wordList){
+                tempWord = x.ToCharArray();
+                if(tempWord.Length == inputWord.Length){
+                    for(int i = 0; i<tempWord.Length; i++){
+                        tempWord[i] = Char.ToLower(tempWord[i]);
+                    }
+                    Array.Sort(tempWord);
+                    if(Enumerable.SequenceEqual(inputWord,tempWord)){
+                        outputList.Add(x);
+                    }
+                }
+            }
+            return outputList;
         }
 
         static void Main(string[] args)
