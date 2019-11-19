@@ -14,12 +14,12 @@ namespace PrimeCalc
         {
             if(n <= 1) return false;
             int count = 0;
-            for(int i = 1; i<10; i++){
+            for(int i = 1; i<1000; i++){
                 if(n % i == 0){
                     count++;
                 } 
             }
-            if(n > 9){
+            if(n > 999){
                 count++;
             }
             if(count == 2) return true;
@@ -29,7 +29,7 @@ namespace PrimeCalc
 
         static void Main(string[] args)
         {
-            Console.WriteLine(IsPrime(73).ToString());
+            Console.WriteLine(IsPrime(121).ToString());
         } 
     }
 }
