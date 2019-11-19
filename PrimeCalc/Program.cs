@@ -14,12 +14,12 @@ namespace PrimeCalc
         {
             if(n <= 1) return false;
             int count = 0;
-            for(int i = 1; i<1000; i++){
+            for(int i = 1; i<10000; i++){
                 if(n % i == 0){
                     count++;
                 } 
             }
-            if(n > 999){
+            if(n > 9999){
                 count++;
             }
             if(count == 2) return true;
