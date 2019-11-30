@@ -40,12 +40,12 @@ A unit of time must be used "as much as possible". It means that the function sh
             //special case for 0
             if(seconds == 0) return "now";
 
-            int[] sizes = new int[]{3600*24*365, 3600*24, 3600, 60};
+            int[] sizes = new int[]{3600*24*365, 3600*24, 3600, 60, 1};
             string[] timeStrings = new string[]{"year", "day", "hour", "minute", "second"};
             string output = String.Empty;
             int counter;
             //general collection for time marks
-            List<int> col = new List<int>();
+            Dictionary<string,int> col = new Dictionary<string, int>();
 
             for (int i = 0; i < sizes.Length; i++)
             {
@@ -56,47 +56,29 @@ A unit of time must be used "as much as possible". It means that the function sh
                     seconds -= sizes[i];
                     counter++;
                 }
-                //add all occurances for each size
-                col.Add(counter);
+                //add all occurances for each size with string
+                if(counter != 0 )col.TryAdd(timeStrings[i], counter);
             }
-            //add whats left, the seconds
-            col.Add(seconds);
 
-            //create string based on the data
-            for (int i = 0; i < col.Count; i++)
-            {
-                //time mark exists
-                if(col[i] != 0){
-                    output += $"{col[i].ToString()} {timeStrings[i]}";
-                    //plural
-                    if(col[i] > 1) output += "s";
-
-
-                    //check whether there is another timemark
-                    if(col[i] != col.Last()){
-
-                        try{
-                            //decide to add , or and
-                            //if next is not last
-                            if(col[i+2] != 0){
-                                output += ", ";
-                            }
-                            else{
-                                //next element is last
-                                output += " and ";
-                                
-                            }
-                        }
-                        catch(Exception){
-                            if(col[i+1] != 0)
-                            output += " and ";
-                        }
-
+            counter = 0;
+            //create output string
+            foreach(var x in col){
+                output += $"{x.Value.ToString()} {x.Key}";
+                if(x.Value > 1) output += "s"; 
+                
+                //if last add nothing
+                if(counter != col.Count-1){
+                    //check if currently one before last
+                    if(counter == col.Count-2){
+                        output += " and ";
                     }
-
+                    //if not, add commas instead of and
+                    else{
+                        output += ", ";
+                    }
                 }
+                counter++;
             }
-
             return output;
         }
 
@@ -108,7 +90,7 @@ A unit of time must be used "as much as possible". It means that the function sh
     // Assert.AreEqual("4 years, 68 days, 3 hours and 4 minutes",HumanTimeFormat.formatDuration(132030240));
 
 
-            int input = 120;
+            int input = 132030240;
             System.Console.WriteLine(formatDuration(input));
         }
     }
