@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MovingZerosToend
 {
@@ -51,6 +50,7 @@ namespace MovingZerosToend
             foreach(var x in MoveZeroes(input)){
                 System.Console.Write($"{x} ");
             }
+            System.Console.WriteLine("");
         }
     }
 }
