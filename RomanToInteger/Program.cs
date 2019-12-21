@@ -1,70 +1,68 @@
 ﻿using System;
+using System.Collections;
 
 namespace RomanToInteger
 {
     class Program
     {
-        /* 
-        
-        Symbol       Value
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-
-
-    I can be placed before V (5) and X (10) to make 4 and 9. 
-    X can be placed before L (50) and C (100) to make 40 and 90. 
-    C can be placed before D (500) and M (1000) to make 400 and 900.
-
-
-
-Example 3:
-
-Input: "IX"
-Output: 9
-
-Example 4:
-
-Input: "LVIII"
-Output: 58
-Explanation: L = 50, V= 5, III = 3.
-
-Example 5:
-
-Input: "MCMXCIV"
-Output: 1994
-Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
-
-
-        
-        */
-
-        public int RomanToInt(string s) {
-            /* I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000 */
+        public static int RomanToInt(string s) {
             int output = 0;
-            foreach(char x in s){
-                
+            char nextChar = 'd';
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                //get what next is (affects value), and whether it even exists
+                if(i+1 < s.Length){
+                    nextChar = s[i+1];
+                }
+
+                //get value
+                switch(s[i]){
+                    case 'I':
+                        if(nextChar == 'V' || nextChar == 'X'){
+                            output--;
+                        }
+                        else{
+                            output++;
+                        }
+                        break;
+                    case 'V':
+                            output += 5;       
+                        break;
+                    case 'X':
+                        if(nextChar == 'L' || nextChar == 'C'){
+                            output -= 10;
+                        }
+                        else{
+                            output += 10;
+                        }                 
+                        break;
+                    case 'L':
+                            output += 50;          
+                        break;
+                    case 'C':
+                        if(nextChar == 'D' || nextChar == 'M'){
+                            output -= 100;
+                        }
+                        else{
+                            output += 100;
+                        }          
+                        break;
+                    case 'D':
+                            output += 500;              
+                        break;
+                    case 'M':
+                            output += 1000;  
+                        break;
+                }
             }
-
-
             return output;
-
         }
 
         static void Main(string[] args)
         {
-            string input = "IX";
-            System.Console.WriteLine(RomanToInteger(input));
+            string input = "MCMXCIV";
+            System.Console.WriteLine(RomanToInt(input));
         }
     }
 }
